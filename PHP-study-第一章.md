@@ -115,3 +115,25 @@
    2. dos命令
       1. net start apache24
       2. net start mysql57
+
+### 写下第一段PHP程序：（index.php）
+
+```php
+<?php
+	//php代码
+	phpinfo();
+?>
+```
+
+### 如何在appserv下切换php版本：
+
+1. 查找apache配置文件
+   - AppServ\Apache24\conf\httpd.conf
+
+2. 设置php7解析器
+   - #LoadModule php5_module C:/AppServ/php5/php5apache2_4.dll
+   - LoadModule php7_module C:/AppServ/php7/php7apache2_4.dll
+
+3. 设置php7的配置文件
+   - #PHPIniDir "C:/AppServ/php5/"
+   - PHPIniDir "C:/AppServ/php7/"
