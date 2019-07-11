@@ -161,7 +161,7 @@ PHP脚本中允许混编
 6. 对象
 
    ```PHP
-   <?PHP
+   <?php
    	class Person {
       		// 特征
        	public $name = "bei";
@@ -190,7 +190,7 @@ PHP脚本中允许混编
 7. 资源
 
    ```PHP
-   <?PHP
+   <?php
        // 连接数据库
        $conn=mysql_connect('localhost','root','12345678');
    
@@ -260,7 +260,7 @@ PHP脚本中允许混编
 ### 字符串连接符
 
 ```PHP
-<?PHP
+<?php
     $a = 'my name is';
     $b = 'bei';
     echo $a.$b;
@@ -271,7 +271,7 @@ PHP脚本中允许混编
 ### 单双引号的区别
 
 ```PHP
-<?PHP
+<?php
     $b = 'bei';
     $a = 10;
     $c = 5;
@@ -289,3 +289,181 @@ PHP脚本中允许混编
     // 双引号中如何包含双引号。需要加\把特殊性取消掉。
 ?>
 ```
+
+### 测试变量类型
+
+1. var_dump();
+
+   ```PHP
+   <?php
+       $a = 10;
+       var_dump($a); 
+   	// 打印结果：int(10)
+   ?>
+   ```
+
+2. gettype();
+
+   ```PHP
+   <?php
+       $a = '10';
+       echo gettype($a); 
+   	// 打印结果：string
+   ?>
+   ```
+
+3. 精确判断某种类型
+
+   ```PHP
+   <?php
+       // 精确判断是否是布尔型：is_bool();
+       $a1 = true;
+       $b1 = is_bool($a1);
+   	var_dump($b1);
+   	// 打印结果：bool(true)
+   	
+   	// 精确判断是否是字符串：is_string();
+   	$a2 = 'bei';
+   	$b2 = is_string($a2);
+   	var_dump($b2);
+   	// 打印结果：bool(true)
+   
+   	// 精确判断是否是浮点型：is_float();
+   	$a3 = 11.11;
+   	$b3 = is_float($a3);
+   	var_dump($b3);
+   	// 打印结果：bool(true)
+   
+   	// 精确判断是否是数组：is_array();
+   	$a4 = array();
+   	$b4 = is_array($a4);
+   	var_dump($b4);
+   	// 打印结果：bool(true)
+   	
+   	// 精确判断是否是对象：is_object();
+   	class Person{};
+   	$a5 = new Person();
+   	$b5 = is_object($a5);
+   	var_dump($b5);
+   	// 打印结果：bool(true)
+   
+   	// 精确判断是否是资源：is_resource();
+   	$a6 = mysql_connect('localhost','root','12345678');
+   	$b6 = is_resource($a6);
+   	var_dump($b6);
+   	// 打印结果：bool(true)
+   
+   	// 精确判断是否是null：is_null();
+   	$a7 =null;
+   	$b7 = is_null($a7);
+   	var_dump($b7);
+   	// 打印结果：bool(true)
+   	
+   	// 精确判断是否是标准类型：is_scalar();
+   	$a8 = 10;
+   	$b8 = is_scalar($a8);
+   	var_dump($b8);
+   	// 打印结果：bool(true)
+   	
+   	// 精确判断是否是函数：is_callable();
+   	function y(){}
+   	$a9= is_callable('y');
+   	var_dump($a9);
+   	// 打印结果：bool(true)
+   ?>
+   ```
+
+### 测试变量是否存在
+
+1. isset();
+
+   ```PHP
+   <?php
+   	// isset测试变量不存在的情况，有2种
+   
+   	//变量未定义
+   	var_dump(isset($b));
+   	// 打印结果：bool(false)
+   
+   	// 变量的值为null
+   	$a = null;
+   	var_dump(isset($a));
+   	// 打印结果： bool(false)
+   ?>
+   ```
+
+2. empty();
+
+   ```PHP
+   <?php
+   	//empty测试变量为空的情况，有8种
+   	// 1.变量未定义
+   	// 2.$a = null;
+   	// 3.$a = 0;
+   	// 4.$a = '';
+   	// 5.$a = '0';
+   	// 6.$a = array();
+   	// 7.$a = 0.0;
+   	// 8.$a = false;
+   	var_dump(empty($a));
+   ?>
+   ```
+
+### 变量类型自动转换：
+
+1. 自动类型转换
+
+   ```PHP
+   <?php
+   	// 整型转字符串
+   	$a1 = 10;
+   	echo 'the num is '.$a1;
+   	// 打印结果：the num is 10
+   
+   	//字符串转整型
+   	$a2 = 10;
+   	$b2 = '10abc3';
+   	echo $a2 + 20;
+   	// 打印结果：30
+   
+   	// 所有类型转布尔类型，为假的情况，其余全为真
+   	// 1.变量未定义
+   	// 2.$a = null;
+   	// 3.$a = 0;
+   	// 4.$a = '';
+   	// 5.$a = '0';
+   	// 6.$a = array();
+   	// 7.$a = 0.0;
+   	// 8.$a = false;
+   ?>
+   ```
+
+2. 强制类型转换
+
+   ```PHP
+   <?php
+       // 字符串强制转换成整型
+   	$a1 = '10abc';
+   	$b1 = (int)$a1;
+   	var_dump($b1);
+   	// 打印结果：int(10)
+   
+   	// 整形强制转换成字符串
+   	$a2 = 10;
+   	$b2 = (string)$a2;
+   	var_dump($b2);
+   	// 打印结果：string(2) "10"
+   	
+   	// 所有类型强制转换成布尔类型
+   	$a3 = 10;
+   	$b3 = (bool)$a3;
+   	var_dump($b3);
+   	// 打印结果：bool(true)
+   	
+   	// 字符串强制转换成浮点型
+   	$a4 = '10.55abc';
+   	$b4 = (float)$a4;
+   	var_dump($b4);
+   	// 打印结果：float(10.55)
+   ?>
+   ```
