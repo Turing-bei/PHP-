@@ -399,3 +399,103 @@
 ?>
 ```
 
+#### 正则函数
+
+```PHP
+<?php
+    /* 1.字符串的匹配与查找 */
+    	/* 1.1 preg_match() 匹配一次 */
+            $str = 'Turing bei';
+            $ptn = '/bei/';
+            preg_match($ptn,$str,$arr);
+            echo '<pre>';
+            print_r($arr);
+            echo '</pre>';
+            /* 打印结果： 
+                Array
+                (
+                    [0] => bei
+                )
+            */
+		
+		/* 1.2 preg_match_all() 逐行匹配 */
+            $str = 'Turing bei bei';
+            $ptn = '/bei/';
+            preg_match_all($ptn,$str,$arr);
+            echo '<pre>';
+            print_r($arr);
+            echo '</pre>';
+            /* 打印结果： 
+               Array
+                (
+                    [0] => Array
+                        (
+                            [0] => bei
+                            [1] => bei
+                        )
+                )
+            */
+
+		
+		/* 1.3 preg_grep() 数组匹配 */
+            $arr = array(
+                'title1'=>'php is very much!',
+                'title2'=>'javascript and php',
+                'title3'=>'javascript and html5'
+            );
+            $ptn = '/php/';
+            $arr2 = preg_grep($ptn,$arr);
+            echo '<pre>';
+            print_r($arr2);
+            echo '</pre>';
+            /* 打印结果： 
+               Array
+                (
+                    [title1] => php is very much!
+                    [title2] => javascript and php
+                )
+            */
+
+    /* 2.字符串的替换 */
+    	/* 1.1 preg_replace() 字符串替换 */
+			$str = 'javascript and php';
+			$ptn = '/php/';
+			$rep = 'python';
+			echo preg_replace($ptn,$rep,$str);
+			/* 打印结果：javascript and python */
+
+    /* 3.字符串的分割与连接 */
+    	/* 1.1 preg_split() 字符串替换 */
+			$str = 'javascript-and+php.and,python';
+			$ptn = '/-|\+|,|\./';
+			$arr = preg_split($ptn,$str);
+			echo '<pre>';
+			print_r($arr);
+			echo '</pre>';
+			/* 打印结果：
+				Array
+                (
+                    [0] => javascript
+                    [1] => and
+                    [2] => php
+                    [3] => and
+                    [4] => python
+                )
+            */
+ ?>
+```
+
+#### 货币格式化
+
+```PHP
+<?php
+    $str = '12345678';
+	function format($str){
+        $arr = str_split($str,3);
+        $str2 = join(',',$arr);
+        echo $str2;
+    }
+	format($str);
+	/* 打印结果： 123,456,78 */
+?>
+```
